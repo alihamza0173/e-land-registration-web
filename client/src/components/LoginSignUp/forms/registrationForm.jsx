@@ -39,6 +39,21 @@ function RegistrationForm({ setFromEnabler, showToast }) {
             {errors.name && errors.name.type === "required" && <span>This is required</span>}
             {errors.name && errors.name.type === "maxLength" && <span>Max length exceeded</span>}
             <label
+                htmlFor={registrationFormConstants.EMAIL}
+            >
+                Email Name*
+            </label>
+            <input
+                {...register('email', { required: true, maxLength: 30 })}
+                type="text"
+                id={registrationFormConstants.EMAIL}
+                placeholder={"Enter " + registrationFormConstants.EMAIL}
+                autoComplete="off"
+                className='w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism'
+            />
+            {errors.email && errors.name.type === "required" && <span>This is required</span>}
+            {errors.email && errors.name.type === "maxLength" && <span>Max length exceeded</span>}
+            <label
                 htmlFor={registrationFormConstants.PASSWORD}
             >
                 Password*

@@ -16,6 +16,7 @@ export const loginFormConstants = {
 export const registrationFormConstants = {
     USER_REGISTERED_MSG: "User Succesfully Registered",
     NAME: "Name",
+    EMAIL: "Email",
     PASSWORD: "Password",
     SIGN_UP: "Sign Up",
     SUBMIT_SIGNUP: "SignUp",
