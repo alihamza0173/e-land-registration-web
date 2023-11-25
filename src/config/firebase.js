@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 
 
 
-export default initializeDb = () => {
+const initializeDb = () => {
     const firebaseConfig = {
         apiKey: "AIzaSyDaeaH0zc8rVJJiBgEVJppr48g1vn0i9eU",
         authDomain: "land-registeration.firebaseapp.com",
@@ -15,3 +15,5 @@ export default initializeDb = () => {
 
     window.config.firebaseApp = initializeApp(firebaseConfig);   
 }
+
+export {initializeDb};
