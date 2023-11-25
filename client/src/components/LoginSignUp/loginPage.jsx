@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-
 
 import LoginForm from './forms/loginForm.jsx';
 import RegistrationForm from './forms/registrationForm.jsx';
@@ -25,19 +22,6 @@ function LoginScreen(props) {
     //     }
     // }, [])
 
-    // to show toast on screen
-    // const showToast = (msg) => {
-    //     toast(msg, {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "light",
-    //     });
-    // }
 
     // setting form switch should work or not
     const handleFormChange = (e) => {
@@ -85,20 +69,7 @@ function LoginScreen(props) {
                     />
                 </span>
             </section>
-            {/* <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
-           
-            <ToastContainer /> */}
+            
         </div>
     )
 }
