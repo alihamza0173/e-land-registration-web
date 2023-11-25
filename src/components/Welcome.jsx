@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
@@ -6,6 +6,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { TransactionContext } from "../context/TransactionContext";
 import { shortenAddress } from "../utils/shortenAddress";
 import { Loader } from ".";
+import { getCollection } from "../config/firebaseOperations/getDocs";
 
 const companyCommonStyles = "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
 
@@ -22,7 +23,7 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 
 const Welcome = () => {
   const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext(TransactionContext);
-
+  const [temp, setTemp] = useState("hello world");
   const handleSubmit = (e) => {
     const { addressTo, amount, keyword, message } = formData;
 
@@ -33,10 +34,25 @@ const Welcome = () => {
     sendTransaction();
   };
 
+  const setResult = async () => {
+    const data = await getCollection("lands");
+    console.log("lands collection return", data);
+    setTemp(JSON.stringify(data));
+
+  }
+  useEffect(() => {
+    setResult();
+  }, []);
+
   return (
     <div className="flex w-full justify-center items-center">
       <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
         <div className="flex flex-1 justify-start items-start flex-col mf:mr-10">
+          <h1 className="text-white">
+            <br />
+            {temp}
+            <br />
+          </h1>
           <h1 className="text-3xl sm:text-5xl text-white text-gradient py-1">
             Buy and Sells Land <br /> across the world
           </h1>
