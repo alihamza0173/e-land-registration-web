@@ -4,9 +4,14 @@ import { useForm } from "react-hook-form";
 import {
   loginPageConstants,
   registrationFormConstants,
+  collectionConstants,
 } from "../../../constants";
 import { showToast } from "../../shared/Toast";
 import Spinner from "../../shared/Spinner";
+import {
+  updateCollection,
+  getCollection,
+} from "../../../config/firebaseOperations/getDocs";
 
 function RegistrationForm({ setFromEnabler }) {
   const [isSpinning, setIsSpinning] = useState(false);
@@ -16,19 +21,30 @@ function RegistrationForm({ setFromEnabler }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setIsSpinning(true);
-    const userData = JSON.stringify({
-      name: data.name,
-      password: data.password,
-    });
-    sessionStorage.setItem(loginPageConstants.USER_INFO_SS, userData);
 
-    setTimeout(() => {
-      showToast(registrationFormConstants.USER_REGISTERED_MSG, "success");
-      setFromEnabler(false);
+    const getRes = await getCollection(collectionConstants.USERS);
+    if (!getRes) {
+      showToast("User Registration Failed!", "error");
       setIsSpinning(false);
-    }, 5000);
+      return;
+    }
+    const isUserExist = getRes.some((user) => {
+      return user.data.email === data.email;
+    });
+    if (isUserExist) {
+      showToast("User Already Exists!", "error");
+      setIsSpinning(false);
+      return;
+    }
+    updateCollection(collectionConstants.USERS, data.email, data).then(
+      (res) => {
+        showToast(registrationFormConstants.USER_REGISTERED_MSG, "success");
+        setFromEnabler(false);
+        setIsSpinning(false);
+      }
+    );
   };
 
   return (

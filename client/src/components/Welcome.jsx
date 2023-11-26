@@ -35,7 +35,7 @@ const Welcome = () => {
   };
 
   const setResult = async () => {
-    const data = await getCollection("lands");
+    const data = await getCollection("users");
     console.log("lands collection return", data);
     setTemp(JSON.stringify(data));
 

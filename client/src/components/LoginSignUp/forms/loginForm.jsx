@@ -6,8 +6,10 @@ import {
   loginFormConstants,
   registrationFormConstants,
   TOKEN,
+  collectionConstants,
+  systemConstants,
 } from "../../../constants";
-import Spinner from "../../shared/Spinner"; 
+import Spinner from "../../shared/Spinner";
 import { getCollection } from "../../../config/firebaseOperations/getDocs";
 import { showToast } from "../../shared/Toast";
 
@@ -22,34 +24,28 @@ function LoginForm(props) {
   // // Handle form submission
   const onSubmit = async (data) => {
     setIsSpinning(() => true);
-    const dataServer = await getCollection("lands");
-    if (dataServer.length) {
-      showToast("Success");
-    } else {
-      console.log("server = ", dataServer, "user inp;ut = ", data);
-      showToast("Failure", "error");
-    }
-    setTimeout(()=>{
+    const registeredUsers = await getCollection(collectionConstants.USERS);
+    if (registeredUsers.length) {
+      // check login info
+      const regUser = registeredUsers.find((user) => {
+        return user.data.email === data.email;
+      });
+      if (regUser) {
+        if (regUser.data.password === data.password) {
+          showToast("Logged in successfully", "success");
+          localStorage.setItem(systemConstants.IS_USER_LOGGED_IN, true);
+          navigate("/dashboard");
+        } else {
+          showToast("Username & Password is incorrect", "error");
+        }
+      } else {
+        showToast("User does not exist.", "error");
+      }
       setIsSpinning(false);
-    }, [5000]);
-    // axios.post("https://unixforapi.hazelsoft.net/api/v1/login", {
-    //     "userName": data.name,
-    //     "password": data.password
-    // })
-    //     .then((response) => {
-    //         props.showToast("welcome to unixfor");
-
-    //         // storing token in local storage
-    //         window.localStorage.setItem(TOKEN, response.data.payload.token);
-
-    //         navigate("/adminpage");
-    //         props.onLogIn();
-    //     })
-    //     .finally((err) => {
-    //         setIsSpinning(() => false);
-    //         console.log(err);
-    //         props.showToast(loginFormConstants.WRONG_USER_ERROR);
-    //     });
+      return;
+    }
+    showToast("Something went wrong.", "error");
+    setIsSpinning(false);
   };
 
   return (
@@ -60,15 +56,15 @@ function LoginForm(props) {
         <input
           id={loginFormConstants.NAME}
           placeholder={loginFormConstants.NAME}
-          {...register("name", { required: true, maxLength: 30 })}
+          {...register("email", { required: true, maxLength: 30 })}
           type="email"
           autoComplete
           className="w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
         />
-        {errors.name && errors.name.type === "required" && (
+        {errors.email && errors.email.type === "required" && (
           <span role="alert">This is required</span>
         )}
-        {errors.name && errors.name.type === "maxLength" && (
+        {errors.email && errors.email.type === "maxLength" && (
           <span role="alert">Max length exceeded</span>
         )}
         <label htmlFor={registrationFormConstants.PASSWORD}>Password*</label>

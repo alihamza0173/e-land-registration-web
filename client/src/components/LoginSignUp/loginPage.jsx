@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import LoginForm from "./forms/loginForm.jsx";
 import RegistrationForm from "./forms/registrationForm.jsx";
-import { loginPageConstants } from "../../constants/index.js";
+import { loginPageConstants, systemConstants } from "../../constants/index.js";
 import { useNavigate } from "react-router";
 
 function LoginScreen(props) {
-  // const nevigate = useNavigate();
+  const nevigate = useNavigate();
   const [formEnabler, setFromEnabler] = useState(false);
   // // deleting session storage just so user cannot access this once logged in and if he does, will have to relogin
   // useEffect(() => {
@@ -29,6 +29,12 @@ function LoginScreen(props) {
       setFromEnabler(false);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem(systemConstants.IS_USER_LOGGED_IN)) {
+      nevigate("/dashboard");
+    }
+  },[]);
 
   return (
     <div

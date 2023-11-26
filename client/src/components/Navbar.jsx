@@ -4,6 +4,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 import logo from "../../images/logo.png";
+import { systemConstants } from "../constants";
+import { logout } from "../utils/utils";
 
 const NavBarItem = ({ title, classprops }) => (
   <li className={`mx-4 cursor-pointer ${classprops}`}>{title}</li>
@@ -24,11 +26,19 @@ const Navbar = () => {
         {["Market", "Exchange", "Tutorials", "Wallets"].map((item, index) => (
           <NavBarItem key={item + index} title={item} />
         ))}
-        <Link to="/login">
-          <li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
-            Login
-          </li>
-        </Link>
+        {localStorage.getItem(systemConstants.IS_USER_LOGGED_IN) ? (
+          <Link to="/" >
+            <li onClick={logout} className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
+              Logout
+            </li>
+          </Link>
+        ) : (
+          <Link to="/login">
+            <li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
+              Login
+            </li>
+          </Link>
+        )}
       </ul>
       <div className="flex relative">
         {!toggleMenu && (
