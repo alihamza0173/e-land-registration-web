@@ -7,7 +7,7 @@ import {
   registrationFormConstants,
   TOKEN,
 } from "../../../constants";
-import Spinner from "../../shared/spinner";
+import Spinner from "../../shared/Spinner"; 
 import { getCollection } from "../../../config/firebaseOperations/getDocs";
 import { showToast } from "../../shared/Toast";
 

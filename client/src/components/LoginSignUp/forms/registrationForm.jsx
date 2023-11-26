@@ -6,7 +6,7 @@ import {
   registrationFormConstants,
 } from "../../../constants";
 import { showToast } from "../../shared/Toast";
-import Spinner from "../../shared/spinner";
+import Spinner from "../../shared/Spinner";
 
 function RegistrationForm({ setFromEnabler }) {
   const [isSpinning, setIsSpinning] = useState(false);
