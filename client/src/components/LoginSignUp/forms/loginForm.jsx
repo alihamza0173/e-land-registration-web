@@ -8,7 +8,8 @@ import {
   TOKEN,
 } from "../../../constants";
 import Spinner from "../../shared/spinner";
-
+import { getCollection } from "../../../config/firebaseOperations/getDocs";
+import { showToast } from "../../shared/Toast";
 
 function LoginForm(props) {
   const {
@@ -21,6 +22,16 @@ function LoginForm(props) {
   // // Handle form submission
   const onSubmit = async (data) => {
     setIsSpinning(() => true);
+    const dataServer = await getCollection("lands");
+    if (dataServer.length) {
+      showToast("Success");
+    } else {
+      console.log("server = ", dataServer, "user inp;ut = ", data);
+      showToast("Failure", "error");
+    }
+    setTimeout(()=>{
+      setIsSpinning(false);
+    }, [5000]);
     // axios.post("https://unixforapi.hazelsoft.net/api/v1/login", {
     //     "userName": data.name,
     //     "password": data.password
@@ -50,8 +61,8 @@ function LoginForm(props) {
           id={loginFormConstants.NAME}
           placeholder={loginFormConstants.NAME}
           {...register("name", { required: true, maxLength: 30 })}
-          type="text"
-          autoComplete="off"
+          type="email"
+          autoComplete
           className="w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
         />
         {errors.name && errors.name.type === "required" && (

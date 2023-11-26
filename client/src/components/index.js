@@ -7,3 +7,4 @@ export { default as Transactions } from "./Transactions";
 export { default as PromotionPage } from "./PromotionPage";
 export { default as Root } from "./Root";
 export { default as LoginPage } from "./LoginSignUp/loginPage";
+export {default as UserDashboard} from "./userDashboard/dashboard";
