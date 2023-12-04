@@ -30,5 +30,6 @@ export const collectionConstants = {
 };
 
 export const systemConstants =  { 
-  IS_USER_LOGGED_IN: "IS_USER_LOGGED_IN"
+  IS_USER_LOGGED_IN: "IS_USER_LOGGED_IN",
+  USER: "USER"
 }

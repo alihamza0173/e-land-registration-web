@@ -1,6 +1,6 @@
 import React from "react";
 import ErrorPage from "./components/error-page";
-import { PromotionPage, LoginPage, Root, UserDashboard } from "./components";
+import { PromotionPage, LoginPage, Root, UserDashboard, Welcome, TransferLand, AdminDashboard } from "./components";
 
 const Routes = () => {
   return [
@@ -17,12 +17,22 @@ const Routes = () => {
           path: "login",
           element: <LoginPage />,
         },
-      ],
-    },
-    {
-      path: "/dashboard",
-      element: <UserDashboard />,
-      errorElement: <ErrorPage />
+        {
+          path: "/dashboard",
+          element: <UserDashboard />,
+          errorElement: <ErrorPage />
+        },
+        {
+          path: "/adminDashboard",
+          element: <AdminDashboard />,
+          errorElement: <ErrorPage />
+        },
+        {
+          path: "/TransferLand",
+          element: <TransferLand />,
+          errorElement: <ErrorPage />
+        }
+      ]
     }
   ];
 };

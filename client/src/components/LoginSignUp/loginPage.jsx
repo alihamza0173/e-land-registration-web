@@ -8,17 +8,6 @@ import { useNavigate } from "react-router";
 function LoginScreen(props) {
   const nevigate = useNavigate();
   const [formEnabler, setFromEnabler] = useState(false);
-  // // deleting session storage just so user cannot access this once logged in and if he does, will have to relogin
-  // useEffect(() => {
-  //     const isLoggedIn = localStorage.getItem(TOKEN);
-  //     if (isLoggedIn && props.isLoggedIn) {
-  //         nevigate('/adminpage');
-  //     }
-  //     else {
-  //         localStorage.clear();
-  //         props.onLogOut();
-  //     }
-  // }, [])
 
   // setting form switch should work or not
   const handleFormChange = (e) => {
@@ -32,7 +21,7 @@ function LoginScreen(props) {
 
   useEffect(() => {
     if (localStorage.getItem(systemConstants.IS_USER_LOGGED_IN)) {
-      nevigate("/dashboard");
+      window.location.replace("/dashboard");
     }
   },[]);
 

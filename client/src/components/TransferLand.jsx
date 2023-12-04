@@ -21,7 +21,7 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
   />
 );
 
-const Welcome = () => {
+const TransferLand = () => {
   const { currentAccount, connectWallet, handleChange, sendTransaction, formData, isLoading } = useContext(TransactionContext);
   const [temp, setTemp] = useState("hello world");
   const handleSubmit = (e) => {
@@ -50,6 +50,7 @@ const Welcome = () => {
         <div className="flex flex-1 justify-start items-start flex-col mf:mr-10">
           <h1 className="text-white">
             <br />
+            {temp}
             <br />
           </h1>
           <h1 className="text-3xl sm:text-5xl text-white text-gradient py-1">
@@ -58,7 +59,7 @@ const Welcome = () => {
           <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
             Explore the crypto world. Buy and sell Lands easily on Krypto.
           </p>
-          {/* {!currentAccount && (
+          {!currentAccount && (
             <button
               type="button"
               onClick={connectWallet}
@@ -69,7 +70,7 @@ const Welcome = () => {
                 Connect Wallet
               </p>
             </button>
-          )} */}
+          )}
 
           <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
             <div className={`rounded-tl-2xl ${companyCommonStyles}`}>
@@ -109,17 +110,14 @@ const Welcome = () => {
             </div>
           </div>
           <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
-            {/* <Input placeholder="Address To" name="addressTo" type="text" handleChange={handleChange} />
+            <Input placeholder="Address To" name="addressTo" type="text" handleChange={handleChange} />
             <Input placeholder="Amount (ETH)" name="amount" type="number" handleChange={handleChange} />
             <Input placeholder="Keyword (Gif)" name="keyword" type="text" handleChange={handleChange} />
-            <Input placeholder="Enter Message" name="message" type="text" handleChange={handleChange} /> */}
+            <Input placeholder="Enter Message" name="message" type="text" handleChange={handleChange} />
 
-            <div>
-              <p className={`text-white ${companyCommonStyles}`}>Crete an account to see registered lands</p>
-            </div>
             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-            {/* {isLoading
+            {isLoading
               ? <Loader />
               : (
                 <button
@@ -129,7 +127,7 @@ const Welcome = () => {
                 >
                   Send now
                 </button>
-              )} */}
+              )}
           </div>
         </div>
       </div>
@@ -137,4 +135,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default TransferLand;

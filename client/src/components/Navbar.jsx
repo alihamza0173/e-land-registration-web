@@ -26,12 +26,24 @@ const Navbar = () => {
         {["Market", "Exchange", "Tutorials", "Wallets"].map((item, index) => (
           <NavBarItem key={item + index} title={item} />
         ))}
-        {localStorage.getItem(systemConstants.IS_USER_LOGGED_IN) ? (
-          <Link to="/" >
-            <li onClick={logout} className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
-              Logout
-            </li>
+        {
+          localStorage.getItem(systemConstants.IS_USER_LOGGED_IN) && <Link to="/TransferLand" >
+            <NavBarItem key={5} title={"Transfer Land"} />
           </Link>
+        }
+        {localStorage.getItem(systemConstants.IS_USER_LOGGED_IN) ? (
+          <>
+            <Link to="/dashboard" >
+              <li className="bg-[#2952e3] py-2 px-7 mx-2 rounded-full cursor-pointer hover:bg-[#2546bd]">
+                My Account
+              </li>
+            </Link>
+            <Link to="/" >
+              <li onClick={logout} className="bg-[#2952e3] py-2 px-7 mx-0 rounded-full cursor-pointer hover:bg-[#2546bd]">
+                Logout
+              </li>
+            </Link>
+          </>
         ) : (
           <Link to="/login">
             <li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">

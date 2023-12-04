@@ -34,7 +34,17 @@ function LoginForm(props) {
         if (regUser.data.password === data.password) {
           showToast("Logged in successfully", "success");
           localStorage.setItem(systemConstants.IS_USER_LOGGED_IN, true);
-          navigate("/dashboard");
+          localStorage.setItem(systemConstants.USER, JSON.stringify(JSON.stringify(regUser)));
+          setTimeout(() => {
+            console.log("Inside set time out");
+            if (regUser?.data.email?.includes("admin")) {
+              console.log("admin dashbaord");
+              window.location.replace("/adminDashboard");
+              return;
+            }
+            window.location.replace("/dashboard");
+
+          }, [1000]);
         } else {
           showToast("Username & Password is incorrect", "error");
         }
